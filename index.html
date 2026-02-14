@@ -1,264 +1,254 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Mumma 💗</title>
+
+<title>For Mumma 💗</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
 <style>
-
-*{
+body {
   margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Playfair Display', serif;
-  background: linear-gradient(to bottom, #ffe6f2, #fff5f8);
+  background: linear-gradient(135deg,#ffe6f0,#fff0f6);
+  font-family:'Playfair Display',serif;
   overflow:hidden;
-  color:#caa84e;
-}
-
-/* Slides */
-
-.slide{
-  height:100vh;
-  width:100vw;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:30px;
-  font-style:italic;
-  scroll-snap-align:start;
-}
-
-.container{
-  height:100vh;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-}
-
-h1{
-  font-size:28px;
-  margin-bottom:20px;
-}
-
-p{
-  font-size:18px;
   color:#b8860b;
-  line-height:1.6;
 }
 
-/* Password Screen */
-
-#passwordScreen{
+.password-screen{
+  position:fixed;
+  width:100%;
   height:100vh;
+  background:#ffe6f0;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:#ffe6f2;
-  flex-direction:column;
+  z-index:100;
 }
 
 input{
   padding:12px;
   border-radius:20px;
   border:1px solid gold;
-  margin-top:15px;
   text-align:center;
 }
 
 button{
   margin-top:15px;
   padding:10px 20px;
-  border-radius:20px;
   border:none;
+  border-radius:20px;
   background:gold;
   color:white;
-  font-weight:bold;
+  font-style:italic;
 }
 
-/* Floating hearts */
-
-.floating{
-  position:fixed;
-  font-size:22px;
-  animation:float 8s linear infinite;
-  opacity:0.7;
-  pointer-events:none;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
-}
-
-/* Sparkle burst */
-
-.sparkle{
-  position:fixed;
-  font-size:18px;
-  animation:spark 2s ease-out forwards;
-  pointer-events:none;
-}
-
-@keyframes spark{
-  0%{transform:scale(0);opacity:1;}
-  100%{transform:scale(2);opacity:0;}
-}
-
-/* Final Reveal */
-
-#finalReveal{
-  position:fixed;
-  top:0;
-  left:0;
+.slides{
+  position:relative;
   height:100vh;
-  width:100vw;
-  background:linear-gradient(to bottom,#ffe6f2,#fff5f8);
+}
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  font-size:32px;
-  color:#d4af37;
+  padding:20px;
+  box-sizing:border-box;
   opacity:0;
-  pointer-events:none;
-  transition:opacity 2s ease;
+  transition:opacity 1s ease-in-out;
 }
 
-#finalReveal.show{
+.slide.active{
   opacity:1;
 }
 
-.hidden{
-  display:none;
+h1{
+  font-size:28px;
 }
 
+p{
+  font-size:18px;
+  margin-top:15px;
+  line-height:1.6;
+}
+
+img{
+  width:80%;
+  max-width:300px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 20px rgba(255,215,0,0.5);
+}
+
+.nav{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 30px;
+  box-sizing:border-box;
+}
+
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.sparkle{
+  position:fixed;
+  font-size:18px;
+  animation:spark 1s ease-out forwards;
+}
+
+@keyframes spark{
+  0%{opacity:1;transform:scale(1);}
+  100%{opacity:0;transform:scale(2);}
+}
 </style>
 </head>
 
 <body>
 
-<!-- PASSWORD SCREEN -->
-
-<div id="passwordScreen">
-  <h2>Enter Password 💗</h2>
-  <input type="password" id="pass" placeholder="Hint: you call me this 😉">
-  <button onclick="unlock()">Open</button>
+<div class="password-screen" id="passwordScreen">
+  <h1>Enter Password 💗</h1>
+  <input type="password" id="passwordInput">
+  <button onclick="checkPassword()">Unlock</button>
 </div>
 
-<!-- MAIN CONTENT -->
+<div class="slides" id="slides">
 
-<div id="mainContent" class="hidden">
-<div class="container" id="slides">
-
-<section class="slide">
-<h1>Hi Mummaaaaaaa 💕</h1>
-<p>I made something just for you my ladylove 🌸</p>
-</section>
-
-<section class="slide">
-<h1>You are my first home 🤍</h1>
-<p>The safest place I’ve ever known 💛</p>
-</section>
-
-<section class="slide">
-<h1>Thank you for everything 💗</h1>
-<p>For every sacrifice… every silent prayer… every hug 🌷</p>
-</section>
-
-<section class="slide">
-<h1>I am because of you 💕</h1>
-<p>Your strength lives in me. Your love protects me 🌸</p>
-</section>
-
-<section class="slide">
-<h1>No one can replace you 💜</h1>
-<p>You are my forever person 🌻</p>
-</section>
-
-<section class="slide">
-<h1>My bubbly mummy 🥰😋</h1>
-<p>Your laughter is my favourite sound 💕</p>
-</section>
-
-<section class="slide">
-<h1>I love you so so much Mumma 💛</h1>
-<p>Always and forever 🤍</p>
-</section>
-
-<section class="slide">
-<h1>Scroll one more time… 💖</h1>
-</section>
-
-</div>
-</div>
-
-<!-- FINAL REVEAL -->
-
-<div id="finalReveal">
-  <div>
-    I LOVE YOU MUMMA 💖✨<br><br>
-    Forever Your Baby 💕
+  <div class="slide active">
+    <div>
+      <h1>Hi Mummaaaaaaa 💕</h1>
+      <p>I made something just for you my ladylove 💗</p>
+    </div>
   </div>
+
+  <div class="slide">
+    <div>
+      <h1>You are my first home 🌸</h1>
+      <p>Your hug is my safest place 🤍</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>Thank you for everything 💛</h1>
+      <p>For your sacrifices, love and strength.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>My bubbly mummy 🥰😋</h1>
+      <p>Your laughter makes my world brighter ☀️</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>No one can replace you 💜</h1>
+      <p>You are my forever person 🌻</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>I love you so so much 🤍</h1>
+      <p>More than words could ever explain 💗</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>Our Favorite Memory 🌷</h1>
+      <img src="IMG_8137.jpeg">
+      <p>Every picture with you is my treasure ✨</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div>
+      <h1>Happy Valentine's Day Mumma 💕</h1>
+      <p>Forever your baby 🤍</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav">
+  <button onclick="prevSlide()">Previous</button>
+  <button onclick="nextSlide()">Next</button>
 </div>
 
 <script>
+let current=0;
+let slides=document.querySelectorAll(".slide");
 
-/* Unlock function */
+function showSlide(index){
+  slides[current].classList.remove("active");
+  current=index;
+  slides[current].classList.add("active");
+  sparkleBurst();
+}
 
-function unlock(){
-  let p=document.getElementById("pass").value;
-  if(p==="cutumom"){
-    document.getElementById("passwordScreen").style.display="none";
-    document.getElementById("mainContent").classList.remove("hidden");
-    sparkleBurst();
-  }else{
-    alert("Wrong password 🥺");
+function nextSlide(){
+  if(current<slides.length-1){
+    showSlide(current+1);
   }
 }
 
-/* Floating hearts */
-
-let emojis=["❤️","🌸","🪷","🌷","💗","💕","💛","💜","🤍","🌻"];
-
-for(let i=0;i<40;i++){
-  let span=document.createElement("div");
-  span.className="floating";
-  span.style.left=Math.random()*100+"vw";
-  span.style.animationDuration=(5+Math.random()*5)+"s";
-  span.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-  document.body.appendChild(span);
+function prevSlide(){
+  if(current>0){
+    showSlide(current-1);
+  }
 }
 
-/* Sparkle burst */
+function checkPassword(){
+  if(document.getElementById("passwordInput").value==="cutumom"){
+    document.getElementById("passwordScreen").style.display="none";
+  }else{
+    alert("Wrong password 💔");
+  }
+}
+
+function createHeart(){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💗";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,1000);
 
 function sparkleBurst(){
-  for(let i=0;i<30;i++){
-    let spark=document.createElement("div");
-    spark.className="sparkle";
-    spark.innerHTML="✨";
-    spark.style.left=Math.random()*100+"vw";
-    spark.style.top=Math.random()*100+"vh";
-    document.body.appendChild(spark);
-    setTimeout(()=>{spark.remove();},2000);
+  for(let i=0;i<10;i++){
+    let sparkle=document.createElement("div");
+    sparkle.className="sparkle";
+    sparkle.innerHTML="✨";
+    sparkle.style.left=(50+Math.random()*20-10)+"vw";
+    sparkle.style.top=(50+Math.random()*20-10)+"vh";
+    document.body.appendChild(sparkle);
+    setTimeout(()=>sparkle.remove(),1000);
   }
 }
-
-/* Final reveal trigger */
-
-document.getElementById("slides").addEventListener("scroll", function(){
-  let container=this;
-  if(container.scrollTop + container.clientHeight >= container.scrollHeight){
-    document.getElementById("finalReveal").classList.add("show");
-  }
-});
-
 </script>
 
 </body>
