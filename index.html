@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mumma 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Playfair Display', serif;
+  background: linear-gradient(to bottom, #ffe6f2, #fff5f8);
+  overflow:hidden;
+  color:#caa84e;
+}
+
+/* Slides */
+
+.slide{
+  height:100vh;
+  width:100vw;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  font-style:italic;
+  scroll-snap-align:start;
+}
+
+.container{
+  height:100vh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+
+h1{
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+p{
+  font-size:18px;
+  color:#b8860b;
+  line-height:1.6;
+}
+
+/* Password Screen */
+
+#passwordScreen{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#ffe6f2;
+  flex-direction:column;
+}
+
+input{
+  padding:12px;
+  border-radius:20px;
+  border:1px solid gold;
+  margin-top:15px;
+  text-align:center;
+}
+
+button{
+  margin-top:15px;
+  padding:10px 20px;
+  border-radius:20px;
+  border:none;
+  background:gold;
+  color:white;
+  font-weight:bold;
+}
+
+/* Floating hearts */
+
+.floating{
+  position:fixed;
+  font-size:22px;
+  animation:float 8s linear infinite;
+  opacity:0.7;
+  pointer-events:none;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* Sparkle burst */
+
+.sparkle{
+  position:fixed;
+  font-size:18px;
+  animation:spark 2s ease-out forwards;
+  pointer-events:none;
+}
+
+@keyframes spark{
+  0%{transform:scale(0);opacity:1;}
+  100%{transform:scale(2);opacity:0;}
+}
+
+/* Final Reveal */
+
+#finalReveal{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:100vw;
+  background:linear-gradient(to bottom,#ffe6f2,#fff5f8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:32px;
+  color:#d4af37;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 2s ease;
+}
+
+#finalReveal.show{
+  opacity:1;
+}
+
+.hidden{
+  display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+
+<div id="passwordScreen">
+  <h2>Enter Password 💗</h2>
+  <input type="password" id="pass" placeholder="Hint: you call me this 😉">
+  <button onclick="unlock()">Open</button>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div id="mainContent" class="hidden">
+<div class="container" id="slides">
+
+<section class="slide">
+<h1>Hi Mummaaaaaaa 💕</h1>
+<p>I made something just for you my ladylove 🌸</p>
+</section>
+
+<section class="slide">
+<h1>You are my first home 🤍</h1>
+<p>The safest place I’ve ever known 💛</p>
+</section>
+
+<section class="slide">
+<h1>Thank you for everything 💗</h1>
+<p>For every sacrifice… every silent prayer… every hug 🌷</p>
+</section>
+
+<section class="slide">
+<h1>I am because of you 💕</h1>
+<p>Your strength lives in me. Your love protects me 🌸</p>
+</section>
+
+<section class="slide">
+<h1>No one can replace you 💜</h1>
+<p>You are my forever person 🌻</p>
+</section>
+
+<section class="slide">
+<h1>My bubbly mummy 🥰😋</h1>
+<p>Your laughter is my favourite sound 💕</p>
+</section>
+
+<section class="slide">
+<h1>I love you so so much Mumma 💛</h1>
+<p>Always and forever 🤍</p>
+</section>
+
+<section class="slide">
+<h1>Scroll one more time… 💖</h1>
+</section>
+
+</div>
+</div>
+
+<!-- FINAL REVEAL -->
+
+<div id="finalReveal">
+  <div>
+    I LOVE YOU MUMMA 💖✨<br><br>
+    Forever Your Baby 💕
+  </div>
+</div>
+
+<script>
+
+/* Unlock function */
+
+function unlock(){
+  let p=document.getElementById("pass").value;
+  if(p==="cutumom"){
+    document.getElementById("passwordScreen").style.display="none";
+    document.getElementById("mainContent").classList.remove("hidden");
+    sparkleBurst();
+  }else{
+    alert("Wrong password 🥺");
+  }
+}
+
+/* Floating hearts */
+
+let emojis=["❤️","🌸","🪷","🌷","💗","💕","💛","💜","🤍","🌻"];
+
+for(let i=0;i<40;i++){
+  let span=document.createElement("div");
+  span.className="floating";
+  span.style.left=Math.random()*100+"vw";
+  span.style.animationDuration=(5+Math.random()*5)+"s";
+  span.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+  document.body.appendChild(span);
+}
+
+/* Sparkle burst */
+
+function sparkleBurst(){
+  for(let i=0;i<30;i++){
+    let spark=document.createElement("div");
+    spark.className="sparkle";
+    spark.innerHTML="✨";
+    spark.style.left=Math.random()*100+"vw";
+    spark.style.top=Math.random()*100+"vh";
+    document.body.appendChild(spark);
+    setTimeout(()=>{spark.remove();},2000);
+  }
+}
+
+/* Final reveal trigger */
+
+document.getElementById("slides").addEventListener("scroll", function(){
+  let container=this;
+  if(container.scrollTop + container.clientHeight >= container.scrollHeight){
+    document.getElementById("finalReveal").classList.add("show");
+  }
+});
+
+</script>
+
+</body>
+</html>
